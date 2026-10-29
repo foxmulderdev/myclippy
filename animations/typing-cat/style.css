@@ -1,0 +1,27 @@
+.cat-scene { position: absolute; inset: 0; overflow: hidden; -webkit-app-region: no-drag; }
+.cat-svg { width: 100%; height: 100%; }
+.cat-head, .cat-tail, .cat-ear { transform-box: fill-box; transform-origin: center; }
+.cat-head { animation: cat-nod calc(.48s / var(--speed)) ease-in-out infinite alternate; }
+.cat-scene.intense .cat-head { animation-name: cat-nod-intense; }
+.cat-tail { transform-origin: left center; animation: cat-tail calc(1.7s / var(--speed)) ease-in-out infinite alternate; }
+.cat-ear { animation: cat-ear calc(1.2s / var(--speed)) ease-in-out infinite alternate; }
+.cat-paw.left { transform-origin: center bottom; animation: cat-left calc(.24s / var(--speed)) steps(2, end) infinite; }
+.cat-paw.right { transform-origin: center bottom; animation: cat-right calc(.24s / var(--speed)) steps(2, end) infinite; }
+.cat-eye { transform-box: fill-box; transform-origin: center; animation: cat-blink calc(4s / var(--speed)) infinite; }
+.code { animation: cat-code calc(1.5s / var(--speed)) linear infinite; }
+.key.active { fill: #ffe76a; filter: drop-shadow(0 0 4px #ffe76a); }
+.particle { animation: cat-float calc(.9s / var(--speed)) ease-out forwards; }
+.cat-scene.speaking .cat-paw { animation-play-state: paused; }
+.cat-scene.speaking .cat-head { animation: cat-look .7s ease-in-out infinite alternate; }
+.cat-scene.speaking .cat-mouth { display: block; }
+@media (prefers-reduced-motion: reduce) { .cat-scene * { animation-duration: 3s !important; } }
+@keyframes cat-left { 50% { transform: translateY(10px) rotate(5deg); } }
+@keyframes cat-right { 50% { transform: translateY(10px) rotate(-5deg); } }
+@keyframes cat-nod { to { transform: translateY(4px) rotate(1deg); } }
+@keyframes cat-nod-intense { to { transform: translateY(7px) rotate(2deg); } }
+@keyframes cat-look { to { transform: translateY(-6px); } }
+@keyframes cat-tail { to { transform: rotate(16deg); } }
+@keyframes cat-ear { to { transform: rotate(5deg); } }
+@keyframes cat-blink { 0%, 45%, 47%, 100% { transform: scaleY(1); } 46% { transform: scaleY(.08); } }
+@keyframes cat-code { to { transform: translateY(-22px); } }
+@keyframes cat-float { to { transform: translate(18px, -55px); opacity: 0; } }

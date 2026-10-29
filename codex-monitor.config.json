@@ -1,0 +1,8 @@
+{
+  "intervaloMs": 500,
+  "umbralInactividadMs": 3000,
+  "intenseBytes": 1024,
+  "multiplicadores": { "idle": 1, "working": 2.5, "intense": 4 },
+  "rutaSesiones": "",
+  "mostrarBurbuja": true
+}

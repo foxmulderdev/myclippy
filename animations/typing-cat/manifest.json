@@ -1,0 +1,8 @@
+{
+  "id": "typing-cat",
+  "name": "Typing Cat",
+  "entry": "animation.js",
+  "style": "style.css",
+  "width": 160,
+  "height": 210
+}

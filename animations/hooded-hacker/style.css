@@ -1,0 +1,275 @@
+/* animations/hooded-hacker/style.css */
+/* Animation: Hooded hacker at laptop with AI agent status badges */
+
+.hh-scene, .hk-scene {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  -webkit-app-region: no-drag;
+}
+
+.hh-svg, .hk-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Subtle torso breathing & head posture --- */
+.hh-torso, .hk-torso {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: hh-breathe calc(3.2s / var(--speed, 1)) ease-in-out infinite alternate;
+}
+
+.hh-head, .hk-head {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transition: transform 0.4s ease;
+}
+
+/* Idle state: head slightly bowed downward */
+.hh-scene.idle .hh-head, .hk-scene.idle .hk-head {
+  transform: translateY(3px) rotate(1.2deg);
+}
+
+/* --- Typing hands (~0.22s alternating offset) --- */
+.hh-hand-l, .hk-hand-l,
+.hh-hand-r, .hk-hand-r {
+  transform-box: fill-box;
+  transform-origin: center top;
+}
+
+.hh-scene.working .hh-hand-l, .hk-scene.working .hk-hand-l {
+  animation: hh-tap-l calc(0.22s / var(--speed, 1)) ease-in-out infinite alternate;
+}
+.hh-scene.working .hh-hand-r, .hk-scene.working .hk-hand-r {
+  animation: hh-tap-r calc(0.24s / var(--speed, 1)) ease-in-out infinite alternate 0.11s;
+}
+
+.hh-scene.intense .hh-hand-l, .hk-scene.intense .hk-hand-l {
+  animation: hh-tap-l calc(0.11s / var(--speed, 1)) ease-in-out infinite alternate;
+}
+.hh-scene.intense .hh-hand-r, .hk-scene.intense .hk-hand-r {
+  animation: hh-tap-r calc(0.12s / var(--speed, 1)) ease-in-out infinite alternate 0.055s;
+}
+
+/* Idle or done state: still hands */
+.hh-scene.idle .hh-hand-l, .hk-scene.idle .hk-hand-l,
+.hh-scene.idle .hh-hand-r, .hk-scene.idle .hk-hand-r,
+.hh-scene.done .hh-hand-l, .hk-scene.done .hk-hand-l,
+.hh-scene.done .hh-hand-r, .hk-scene.done .hk-hand-r {
+  animation: none !important;
+  transform: none;
+}
+
+/* --- Laptop & code lines --- */
+.hh-screen-glow, .hk-screen-glow {
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.hh-scene.intense .hh-screen-glow, .hk-scene.intense .hk-screen-glow {
+  filter: drop-shadow(0 0 6px rgba(93, 202, 165, 0.75));
+}
+
+.hh-scene.dimmed .hh-screen, .hk-scene.dimmed .hk-screen {
+  opacity: 0.35;
+  transition: opacity 1s ease;
+}
+
+/* Code lines with pathLength=1 written progressively */
+.hh-line, .hk-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: opacity 0.3s ease;
+}
+
+.hh-scene.working .hh-line, .hk-scene.working .hk-line,
+.hh-scene.intense .hh-line, .hk-scene.intense .hk-line {
+  animation: hh-write calc(3.6s / var(--speed, 1)) ease-out infinite;
+}
+
+.hh-scene.working .hh-line:nth-child(1), .hh-scene.intense .hh-line:nth-child(1),
+.hk-scene.working .hk-line:nth-child(1), .hk-scene.intense .hk-line:nth-child(1) { animation-delay: 0s; }
+.hh-scene.working .hh-line:nth-child(2), .hh-scene.intense .hh-line:nth-child(2),
+.hk-scene.working .hk-line:nth-child(2), .hk-scene.intense .hk-line:nth-child(2) { animation-delay: 0.4s; }
+.hh-scene.working .hh-line:nth-child(3), .hh-scene.intense .hh-line:nth-child(3),
+.hk-scene.working .hk-line:nth-child(3), .hk-scene.intense .hk-line:nth-child(3) { animation-delay: 0.9s; }
+.hh-scene.working .hh-line:nth-child(4), .hh-scene.intense .hh-line:nth-child(4),
+.hk-scene.working .hk-line:nth-child(4), .hk-scene.intense .hk-line:nth-child(4) { animation-delay: 1.4s; }
+.hh-scene.working .hh-line:nth-child(5), .hh-scene.intense .hh-line:nth-child(5),
+.hk-scene.working .hk-line:nth-child(5), .hk-scene.intense .hk-line:nth-child(5) { animation-delay: 1.9s; }
+.hh-scene.working .hh-line:nth-child(6), .hh-scene.intense .hh-line:nth-child(6),
+.hk-scene.working .hk-line:nth-child(6), .hk-scene.intense .hk-line:nth-child(6) { animation-delay: 2.4s; }
+
+/* Idle state: dimmed code lines */
+.hh-scene.idle .hh-line, .hk-scene.idle .hk-line {
+  animation: none;
+  stroke-dashoffset: 0.6;
+  opacity: 0.4;
+}
+
+/* Done pause: completed code lines */
+.hh-scene.done .hh-line, .hk-scene.done .hk-line {
+  animation: none;
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+/* Blinking white cursor */
+.hh-cursor, .hk-cursor {
+  animation: hh-blink calc(0.8s / var(--speed, 1)) step-start infinite;
+}
+
+.hh-scene.idle .hh-cursor, .hk-scene.idle .hk-cursor {
+  animation-duration: 1.5s;
+}
+
+.hh-scene.done .hh-cursor, .hk-scene.done .hk-cursor {
+  animation: none;
+  opacity: 1;
+}
+
+/* Floating symbols */
+.hh-float, .hk-float {
+  animation: hh-floating calc(1.8s / var(--speed, 1)) ease-out forwards;
+}
+
+/* --- Agent status badges (under the keyboard) --- */
+.hh-badges, .hk-badges {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  height: 34px;
+}
+
+.hh-badge, .hk-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: bold 9.5px/1 system-ui, sans-serif;
+  cursor: pointer;
+  animation: hh-badge-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: opacity 0.3s ease;
+}
+
+.hh-badge.removing, .hk-badge.removing {
+  animation: hh-badge-out 0.25s ease forwards;
+}
+
+.hh-badge-text, .hk-badge-text {
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.2px;
+}
+
+/* 3px spinning rings */
+.hh-ring, .hk-ring {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: hh-spin calc(1.3s / var(--speed, 1)) linear infinite;
+}
+
+.hh-ring-arc, .hh-ring-arco, .hk-ring-arc, .hk-ring-arco {
+  stroke-dasharray: 16 70;
+  stroke-linecap: round;
+}
+
+.hh-ring-dots, .hh-ring-puntos, .hk-ring-dots, .hk-ring-puntos {
+  stroke-dasharray: 3 8;
+  stroke-linecap: round;
+}
+
+.hh-ring-double-arc, .hh-ring-dos-arcos, .hk-ring-double-arc, .hk-ring-dos-arcos {
+  stroke-dasharray: 14 29 14 29;
+  stroke-linecap: round;
+}
+
+.hh-ring-segments, .hh-ring-segmentos, .hk-ring-segments, .hk-ring-segmentos {
+  stroke-dasharray: 10 6;
+  stroke-linecap: butt;
+}
+
+.hh-badge-overflow, .hk-badge-overflow {
+  background: #3A3C44;
+  color: #CFCFD4;
+  font-size: 10px;
+}
+
+/* --- Keyframes --- */
+@keyframes hh-tap-l {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(5px); }
+}
+
+@keyframes hh-tap-r {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(5px); }
+}
+
+@keyframes hh-breathe {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(1.025); }
+}
+
+@keyframes hh-write {
+  0% { stroke-dashoffset: 1; opacity: 0.2; }
+  35% { stroke-dashoffset: 0; opacity: 1; }
+  85% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 1; opacity: 0.2; }
+}
+
+@keyframes hh-blink {
+  50% { opacity: 0; }
+}
+
+@keyframes hh-floating {
+  0% { transform: translate(0, 0); opacity: 0.9; }
+  100% { transform: translate(-6px, -28px); opacity: 0; }
+}
+
+@keyframes hh-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hh-badge-in {
+  0% { transform: scale(0) translateY(8px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes hh-badge-out {
+  to { transform: scale(0); opacity: 0; }
+}
+
+/* Aliases for backwards compatibility */
+@keyframes hk-tap-l { 0% { transform: translateY(0); } 100% { transform: translateY(5px); } }
+@keyframes hk-tap-r { 0% { transform: translateY(0); } 100% { transform: translateY(5px); } }
+@keyframes hk-breathe { 0% { transform: scaleY(1); } 100% { transform: scaleY(1.025); } }
+@keyframes hk-write { 0% { stroke-dashoffset: 1; opacity: 0.2; } 35% { stroke-dashoffset: 0; opacity: 1; } 85% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 1; opacity: 0.2; } }
+@keyframes hk-blink { 50% { opacity: 0; } }
+@keyframes hk-floating { 0% { transform: translate(0, 0); opacity: 0.9; } 100% { transform: translate(-6px, -28px); opacity: 0; } }
+@keyframes hk-spin { to { transform: rotate(360deg); } }
+@keyframes hk-badge-in { 0% { transform: scale(0) translateY(8px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes hk-badge-out { to { transform: scale(0); opacity: 0; } }
+
+/* --- Accessibility: prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .hh-scene *, .hk-scene * {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+  .hh-ring, .hk-ring { animation: none !important; }
+  .hh-hand-l, .hk-hand-l, .hh-hand-r, .hk-hand-r { animation: none !important; }
+  .hh-line, .hk-line { stroke-dashoffset: 0 !important; }
+}

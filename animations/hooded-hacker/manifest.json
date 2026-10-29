@@ -1,0 +1,8 @@
+{
+  "id": "hooded-hacker",
+  "name": "Hooded Hacker",
+  "entry": "animation.js",
+  "style": "style.css",
+  "width": 220,
+  "height": 262
+}

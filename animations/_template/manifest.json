@@ -1,0 +1,8 @@
+{
+  "id": "my-animation",
+  "name": "My Animation",
+  "entry": "animation.js",
+  "style": "style.css",
+  "width": 320,
+  "height": 420
+}

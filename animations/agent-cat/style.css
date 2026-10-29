@@ -1,0 +1,114 @@
+/* === Agent Cat — animation with AI agent status badges === */
+.ac-scene, .ga-scene { position: absolute; inset: 0; overflow: visible; -webkit-app-region: no-drag; }
+.ac-svg, .ga-svg { width: 100%; height: 100%; overflow: visible; }
+
+/* --- Head, ears, tail --- */
+.ac-head, .ga-head, .ac-tail, .ga-tail, .ac-ear, .ga-ear { transform-box: fill-box; transform-origin: center; }
+.ac-head, .ga-head { animation: ac-nod calc(.5s / var(--speed, 1)) ease-in-out infinite alternate; }
+.ac-tail, .ga-tail { transform-origin: right center; animation: ac-tail calc(1.6s / var(--speed, 1)) ease-in-out infinite alternate; }
+.ac-ear, .ga-ear { animation: ac-ear calc(1.3s / var(--speed, 1)) ease-in-out infinite alternate; }
+
+/* --- Eyes: pupil, highlight, and centered blinking --- */
+.ac-blink, .ga-blink { transform-box: fill-box; transform-origin: center; }
+.ac-eye-item, .ga-eye-item {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ac-blink calc(4s / var(--speed, 1)) infinite;
+}
+.ac-eye, .ga-eye { transform-box: fill-box; transform-origin: center; }
+.ac-pupil, .ga-pupil { animation: ac-read calc(3s / var(--speed, 1)) ease-in-out infinite alternate; }
+
+/* Idle: relaxed half-closed eyes and slower blinking */
+.ac-scene.idle .ac-eye-item, .ga-scene.idle .ga-eye-item {
+  animation: ac-blink-idle calc(5.2s / var(--speed, 1)) infinite;
+}
+
+/* Sleeping: fully closed eyes */
+.ac-scene.sleeping .ac-eye-item, .ga-scene.sleeping .ga-eye-item {
+  animation: none;
+  transform: scaleY(.06);
+}
+
+/* Satisfaction on task completion: smile and right eye wink */
+.ac-scene.satisfied .ac-smile, .ga-scene.satisfied .ga-smile { display: block; }
+.ac-scene.satisfied .ac-eye-right, .ga-scene.satisfied .ga-eye-right {
+  animation: none;
+  transform: scaleY(.06);
+}
+
+/* --- Paws --- */
+.ac-paw-l, .ga-paw-l { transform-box: fill-box; transform-origin: center bottom; animation: ac-paw-l calc(.26s / var(--speed, 1)) steps(2, end) infinite; }
+.ac-paw-r, .ga-paw-r { transform-box: fill-box; transform-origin: center bottom; animation: ac-paw-r calc(.26s / var(--speed, 1)) steps(2, end) infinite; }
+
+/* --- Keyboard & code --- */
+.ac-key.active, .ga-key.active { fill: #ffe76a; filter: drop-shadow(0 0 3px #ffe76a); }
+.ac-code, .ga-code { animation: ac-code calc(1.5s / var(--speed, 1)) linear infinite; }
+.ac-particle, .ga-particle { animation: ac-float calc(.85s / var(--speed, 1)) ease-out forwards; }
+
+/* --- States --- */
+.ac-scene.sleeping .ac-paw-l, .ac-scene.sleeping .ac-paw-r,
+.ga-scene.sleeping .ga-paw-l, .ga-scene.sleeping .ga-paw-r { animation-play-state: paused; }
+.ac-scene.sleeping .ac-head, .ga-scene.sleeping .ga-head { animation: ac-sleep 2s ease-in-out infinite alternate; }
+.ac-scene.sleeping .ac-zzz, .ga-scene.sleeping .ga-zzz { display: block; }
+
+.ac-scene.intense .ac-head, .ga-scene.intense .ga-head { animation-name: ac-nod-intense; }
+.ac-scene.intense .ac-sweat, .ga-scene.intense .ga-sweat { display: block; }
+.ac-scene.intense .ac-brows, .ga-scene.intense .ga-brows { display: block; }
+
+.ac-scene.speaking .ac-paw-l, .ac-scene.speaking .ac-paw-r,
+.ga-scene.speaking .ga-paw-l, .ga-scene.speaking .ga-paw-r { animation-play-state: paused; }
+.ac-scene.speaking .ac-head, .ga-scene.speaking .ga-head { animation: ac-look .7s ease-in-out infinite alternate; }
+.ac-scene.speaking .ac-mouth-talk, .ga-scene.speaking .ga-mouth-talk { display: block; }
+
+/* --- Zzz, sweat, brows, smile, speech mouth (hidden by default) --- */
+.ac-zzz, .ga-zzz, .ac-sweat, .ga-sweat, .ac-brows, .ga-brows, .ac-smile, .ga-smile, .ac-mouth-talk, .ga-mouth-talk { display: none; }
+
+/* --- Agent badges --- */
+.ac-badges, .ga-badges { display: flex; gap: 4px; justify-content: center; position: absolute; bottom: 0; left: 0; right: 0; height: 34px; pointer-events: auto; }
+
+.ac-badge, .ga-badge {
+  width: 28px; height: 28px; border-radius: 50%; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font: bold 9px/1 system-ui, sans-serif; cursor: pointer;
+  animation: ac-badge-in .35s cubic-bezier(.34, 1.56, .64, 1) both;
+  transition: opacity .3s ease;
+}
+.ac-badge.removing, .ga-badge.removing { animation: ac-badge-out .25s ease forwards; }
+.ac-badge-text, .ga-badge-text { position: relative; z-index: 1; }
+
+/* Spinning rings — SVG overlay */
+.ac-ring, .ga-ring { position: absolute; inset: -2px; width: calc(100% + 4px); height: calc(100% + 4px); animation: ac-spin calc(1.2s / var(--speed, 1)) linear infinite; }
+.ac-ring-arc, .ac-ring-arco, .ga-ring-arc, .ga-ring-arco { stroke-dasharray: 14 72; stroke-linecap: round; }
+.ac-ring-dots, .ac-ring-puntos, .ga-ring-dots, .ga-ring-puntos { stroke-dasharray: 3 8; stroke-linecap: round; }
+.ac-ring-double-arc, .ac-ring-dos-arcos, .ga-ring-double-arc, .ga-ring-dos-arcos { stroke-dasharray: 14 28 14 28; stroke-linecap: round; }
+.ac-ring-segments, .ac-ring-segmentos, .ga-ring-segments, .ga-ring-segmentos { stroke-dasharray: 10 6; stroke-linecap: butt; }
+
+.ac-badge-overflow, .ga-badge-overflow { background: #555; color: #ccc; font-size: 10px; }
+
+/* --- Accessibility --- */
+@media (prefers-reduced-motion: reduce) {
+  .ac-scene *, .ga-scene * { animation-duration: 0s !important; transition-duration: 0s !important; }
+  .ac-ring, .ga-ring { animation: none !important; }
+  .ac-paw-l, .ga-paw-l, .ac-paw-r, .ga-paw-r { animation: none !important; }
+}
+
+/* --- Keyframes --- */
+@keyframes ac-paw-l { 50% { transform: translateY(4px) rotate(4deg); } }
+@keyframes ac-paw-r { 50% { transform: translateY(4px) rotate(-4deg); } }
+@keyframes ac-nod { to { transform: translateY(2px) rotate(.8deg); } }
+@keyframes ac-nod-intense { to { transform: translateY(4px) rotate(1.5deg); } }
+@keyframes ac-sleep { to { transform: translateY(3px); } }
+@keyframes ac-look { to { transform: translateY(-4px); } }
+@keyframes ac-tail { to { transform: rotate(-18deg); } }
+@keyframes ac-ear { to { transform: rotate(4deg); } }
+@keyframes ac-blink { 0%, 45%, 47%, 100% { transform: scaleY(1); } 46% { transform: scaleY(.06); } }
+@keyframes ac-blink-idle { 0%, 45%, 47%, 100% { transform: scaleY(.75); } 46% { transform: scaleY(.06); } }
+@keyframes ac-read { 0%, 100% { transform: translateX(-1.5px); } 50% { transform: translateX(1.5px); } }
+@keyframes ac-code { to { transform: translateY(-14px); } }
+@keyframes ac-float { to { transform: translate(12px, -35px); opacity: 0; } }
+@keyframes ac-spin { to { transform: rotate(360deg); } }
+@keyframes ac-badge-in { 0% { transform: scale(0) translateY(8px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
+@keyframes ac-badge-out { to { transform: scale(0); opacity: 0; } }
+@keyframes ac-zzz-float { 0% { opacity: 1; transform: translate(0, 0) scale(.8); } 100% { opacity: 0; transform: translate(8px, -18px) scale(1.1); } }
+.ac-zzz text, .ga-zzz text { animation: ac-zzz-float 2s ease-in-out infinite; }
+.ac-zzz text:nth-child(2), .ga-zzz text:nth-child(2) { animation-delay: .7s; }

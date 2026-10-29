@@ -1,0 +1,52 @@
+{
+  "name": "my-clippy",
+  "version": "1.0.0",
+  "description": "Floating desktop assistant with interchangeable animations.",
+  "author": "Your name",
+  "main": "main.js",
+  "scripts": {
+    "start": "set ELECTRON_RUN_AS_NODE=&& electron .",
+    "build": "electron-builder --win",
+    "build:dir": "electron-builder --win --dir",
+    "dist": "npm run build",
+    "simulate-codex": "node simulate-codex.js",
+    "simulate-agents": "node simulate-agents.js",
+    "simular-codex": "node simulate-codex.js",
+    "simular-agentes": "node simulate-agents.js"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.tunombre.myclippy",
+    "productName": "My Clippy",
+    "files": [
+      "*.js",
+      "activity-monitor.js",
+      "*.html",
+      "*.css",
+      "*.json",
+      "animations/**/*",
+      "!dist/**",
+      "!README.md",
+      "!**/*.md"
+    ],
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "MyClippy-${version}-nsis.${ext}"
+    },
+    "portable": {
+      "artifactName": "MyClippy-${version}-portable.${ext}"
+    },
+    "artifactName": "MyClippy-${version}-${type}.${ext}"
+  }
+}

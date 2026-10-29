@@ -1,0 +1,8 @@
+{
+  "id": "agent-cat",
+  "name": "Agent Cat",
+  "entry": "animation.js",
+  "style": "style.css",
+  "width": 200,
+  "height": 232
+}
