@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # My Clippy
 
 Ejecuta `npm start` para abrir al asistente.
@@ -65,3 +66,6 @@ npm run simular-agentes gemini        # Simula Gemini CLI durante 15 s
 npm run simular-agentes todos         # Simula todos a la vez (modo 'intense')
 ```
 
+=======
+# myclippy
+>>>>>>> d03e10e5cc6c8f2aefba73ec1951d5e3932e7c09
