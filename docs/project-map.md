@@ -1,4 +1,4 @@
-﻿# Mapa del Proyecto: My Clippy
+# Mapa del Proyecto: My Clippy
 
 > **Versión del proyecto:** 1.0.0  
 > **Tecnologías clave:** Electron, Node.js, JavaScript (ES6+ / CommonJS / ES Modules), SVG, CSS3  
@@ -39,6 +39,7 @@ flowchart TD
         
         subgraph ActiveAnimation["Animación Activa (ES Module dinámico)"]
             AgentCat["Agent Cat (animations/agent-cat)\n- SVG Cat + Badges + Rings\n- Eye states + Sleep (3 min)\n- Satisfaction gesture"]
+            DinoRunner["Dino Runner (animations/dino-runner)\n- Pixel art T-rex + Obstacles\n- Auto jump + Continuous run\n- Badges & Rings"]
             HoodedHacker["Hooded Hacker (animations/hooded-hacker)\n- SVG Hacker + Badges\n- Code stream + Floating symbols\n- Dimming & Agent alerts"]
             TypingCat["Typing Cat (animations/typing-cat)\n- Classic Typing Cat"]
             Template["Template (animations/_template)\n- Custom boilerplate"]
@@ -89,6 +90,11 @@ my-clippy/
 │   │   ├── manifest.json      # Metadatos (id: "agent-cat", tamaño 200x232)
 │   │   ├── animation.js       # Lógica SVG, parpadeo centrado, estados y badges
 │   │   └── style.css          # Anillos giratorios, keyframes, sudor, sueño
+│   │
+│   ├── dino-runner/           # Animación: Dinosaurio pixel art con salto automático de obstáculos
+│   │   ├── manifest.json      # Metadatos (id: "dino-runner", tamaño 200x232)
+│   │   ├── animation.js       # Lógica SVG en pixel art, generación de cactus y badges
+│   │   └── style.css          # Animaciones CSS de pasos, suelo e insignias
 │   │
 │   ├── hooded-hacker/         # Animación: Hacker encapuchado en terminal con insignias
 │   │   ├── manifest.json      # Metadatos (id: "hooded-hacker", tamaño 220x262)
@@ -164,7 +170,13 @@ my-clippy/
   - **Intenso (3+ agentes):** Cejas fruncidas, gota de sudor, patas aceleradas.
   - **Satisfacción:** Sonrisa y guiño del ojo derecho durante 1.5 s al pasar de trabajo a reposo.
 
-### 3.5. Animación Hacker Encapuchado (`animations/hooded-hacker/`)
+### 3.5. Animación Dino Corredor (`animations/dino-runner/`)
+- **Diseño SVG Pixel Art:** Dinosaurio T-rex original generado mediante rectángulos SVG con `shape-rendering: crispEdges` (`viewBox="0 0 200 232"`), en color hueso con sutil sombra oscura para lectura en cualquier fondo.
+- **Caminata Continua:** Dos cuadros de patas alternantes y suelo texturizado con desplazamiento continuo por CSS sincronizado mediante la variable `--speed`.
+- **Generación y Salto Automático de Obstáculos:** Cuando hay agentes de IA activos, se generan cactus (pequeños, altos o dobles) desde la derecha; el dino ejecuta un salto parabólico automático sincronizado según la velocidad para nunca colisionar. Al terminar los agentes, los obstáculos en pantalla se despejan y vuelve a solo caminar.
+- **Insignias y Reacciones:** Insignias giratorias interactivas situadas bajo la línea del suelo. Al hacer clic sobre el dino emite un rugido y salta.
+
+### 3.6. Animación Hacker Encapuchado (`animations/hooded-hacker/`)
 - **Diseño SVG:** Figura en perspectiva 3/4 mirando a la izquierda hacia la pantalla (`viewBox="0 0 220 262"`). Rostro en completa sombra dentro de la capucha (`#0E1013`), sin máscara ni rostro visible. Laptop con pantalla orientada al usuario y teclado en perspectiva.
 - **Líneas de Código y Símbolos Flotantes:** Seis líneas de código estilizadas con efecto de escritura continua escalonada (`stroke-dasharray`), cursor parpadeante y símbolos de terminal (`01`, `>_`) que flotan hacia arriba.
 - **Mecanismo de Atenuación e Inactividad:** Tras 3 minutos sin actividad de agentes, la pantalla atenúa su brillo al 35% y las manos detienen el tecleo. Cualquier actividad restaura instantáneamente la intensidad.

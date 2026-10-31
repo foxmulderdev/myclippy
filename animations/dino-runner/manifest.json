@@ -1,0 +1,8 @@
+{
+  "id": "dino-runner",
+  "name": "Dino Runner",
+  "entry": "animation.js",
+  "style": "style.css",
+  "width": 200,
+  "height": 232
+}

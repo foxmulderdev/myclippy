@@ -40,6 +40,7 @@ Puedes alternar entre las animaciones en cualquier momento haciendo **clic derec
 | Animación | Identificador | Dimensiones | Descripción |
 | :--- | :--- | :--- | :--- |
 | **Agent Cat** | `agent-cat` | 200 × 232 px | Gato naranja con código en pantalla, parpadeo centrado, estados de ojos (sueño a los 3 min, alerta, cansancio/sudor) e insignias dinámicas con anillos giratorios. |
+| **Dino Runner** | `dino-runner` | 200 × 232 px | Dinosaurio T-rex en pixel art que corre de forma continua, esquivando y saltando automáticamente obstáculos (cactus) cuando hay agentes de IA trabajando. |
 | **Hooded Hacker** | `hooded-hacker` | 220 × 262 px | Hacker encapuchado en perspectiva frente a una laptop terminal con líneas de código escalonadas, símbolos flotantes (`01`, `>_`), atenuación por inactividad e insignias. |
 | **Typing Cat** | `typing-cat` | 160 × 210 px | La animación clásica original del gato tecleando a distintas velocidades. |
 | **Template** | `_template` | 320 × 420 px | Plantilla de código inicial para crear fácilmente tus propios personajes o integrar GIFs. |

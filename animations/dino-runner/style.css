@@ -1,0 +1,239 @@
+/* animations/dino-runner/style.css */
+
+.dc-container {
+  position: relative;
+  width: 200px;
+  height: 232px;
+  margin: 0 auto;
+  overflow: hidden;
+  user-select: none;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+.dc-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 180px;
+  overflow: hidden;
+}
+
+/* Dino Character Layer */
+.dc-dino-wrapper {
+  position: absolute;
+  left: 28px;
+  top: 96px;
+  width: 44px;
+  height: 48px;
+  z-index: 5;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.65));
+}
+
+.dc-dino-wrapper.dc-jumping {
+  animation: dc-jump calc(0.6s / var(--speed, 1)) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes dc-jump {
+  0% { transform: translateY(0); }
+  45% { transform: translateY(-56px); }
+  55% { transform: translateY(-56px); }
+  100% { transform: translateY(0); }
+}
+
+.dc-dino-svg {
+  width: 44px;
+  height: 48px;
+  display: block;
+  shape-rendering: crispEdges;
+}
+
+/* Alternate stepping legs via CSS animation synced with --speed */
+.dc-leg-1 {
+  display: block;
+  animation: dc-step-1 calc(0.22s / var(--speed, 1)) infinite steps(1);
+}
+
+.dc-leg-2 {
+  display: none;
+  animation: dc-step-2 calc(0.22s / var(--speed, 1)) infinite steps(1);
+}
+
+.dc-jumping .dc-leg-1 {
+  display: block !important;
+  animation: none !important;
+}
+
+.dc-jumping .dc-leg-2 {
+  display: none !important;
+  animation: none !important;
+}
+
+@keyframes dc-step-1 {
+  0%, 49.9% { display: block; }
+  50%, 100% { display: none; }
+}
+
+@keyframes dc-step-2 {
+  0%, 49.9% { display: none; }
+  50%, 100% { display: block; }
+}
+
+/* Ground Line with Pixel Texture */
+.dc-ground {
+  position: absolute;
+  left: 0;
+  top: 144px;
+  width: 200px;
+  height: 16px;
+  overflow: hidden;
+  z-index: 2;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.dc-ground-track {
+  display: flex;
+  width: 400px;
+  height: 16px;
+  animation: dc-scroll-ground calc(1.4s / var(--speed, 1)) linear infinite;
+}
+
+@keyframes dc-scroll-ground {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200px); }
+}
+
+.dc-ground-segment {
+  width: 200px;
+  height: 16px;
+  flex-shrink: 0;
+  shape-rendering: crispEdges;
+}
+
+/* Obstacles Layer */
+.dc-obstacles-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.dc-obstacle {
+  position: absolute;
+  left: 200px;
+  top: 104px;
+  width: 32px;
+  height: 40px;
+  animation: dc-slide-obstacle calc(1.4s / var(--speed, 1)) linear forwards;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6));
+}
+
+@keyframes dc-slide-obstacle {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-240px); }
+}
+
+/* Agent Badges Container Below Ground */
+.dc-badges {
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 200px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.dc-badge {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.dc-badge:hover {
+  transform: scale(1.15);
+}
+
+.dc-badge-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dc-ring {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+}
+
+/* Animated Ring Styles */
+.dc-ring-arc {
+  stroke-dasharray: 40 42;
+  animation: dc-spin calc(1.8s / var(--speed, 1)) linear infinite;
+  transform-origin: 16px 16px;
+}
+
+.dc-ring-dots {
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+  animation: dc-spin calc(2.4s / var(--speed, 1)) linear infinite;
+  transform-origin: 16px 16px;
+}
+
+.dc-ring-double-arc {
+  stroke-dasharray: 22 19;
+  animation: dc-spin calc(1.8s / var(--speed, 1)) linear infinite;
+  transform-origin: 16px 16px;
+}
+
+.dc-ring-segments {
+  stroke-dasharray: 8 4;
+  animation: dc-spin calc(2.1s / var(--speed, 1)) linear infinite;
+  transform-origin: 16px 16px;
+}
+
+@keyframes dc-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.dc-badge-overflow {
+  background-color: #3C4043 !important;
+  color: #E8EAED !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .dc-ring-arc,
+  .dc-ring-dots,
+  .dc-ring-double-arc,
+  .dc-ring-segments,
+  .dc-ground-track,
+  .dc-leg-1,
+  .dc-leg-2 {
+    animation: none !important;
+  }
+}
+
