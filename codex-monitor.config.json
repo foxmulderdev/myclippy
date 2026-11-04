@@ -1,7 +1,12 @@
 {
+  "intervalMs": 500,
+  "inactivityThresholdMs": 3000,
+  "intenseBytes": 1024,
+  "multipliers": { "idle": 1, "working": 2.5, "intense": 4 },
+  "sessionsPath": "",
+  "showBubble": true,
   "intervaloMs": 500,
   "umbralInactividadMs": 3000,
-  "intenseBytes": 1024,
   "multiplicadores": { "idle": 1, "working": 2.5, "intense": 4 },
   "rutaSesiones": "",
   "mostrarBurbuja": true

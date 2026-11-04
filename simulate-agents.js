@@ -30,20 +30,20 @@ if (arg === 'custom') {
     if (fs.existsSync(customPath)) {
       try { customArr = JSON.parse(fs.readFileSync(customPath, 'utf8')) || []; } catch (_) {}
     }
-    // "Agente Alfa" collides with Antigravity ("Ag") to test 3-letter fallback resolution ("Aga")
-    const customTestId = 'agente-alfa';
-    if (!customArr.some(a => a.id === customTestId)) {
+    // "Agent Alpha" collides with Antigravity ("Ag") to test 3-letter fallback resolution ("Aga")
+    const customTestId = 'agent-alpha';
+    if (!customArr.some(a => a.id === customTestId || a.id === 'agente-alfa')) {
       customArr.push({
         id: customTestId,
-        name: 'Agente Alfa',
-        nombre: 'Agente Alfa',
+        name: 'Agent Alpha',
+        nombre: 'Agent Alpha',
         active: true,
         activo: true,
         inactivityThresholdMs: 8000,
         umbralInactividadMs: 8000,
         sources: [
           {
-            dir: '~/.gemini/tmp/simulacion-custom',
+            dir: '~/.gemini/tmp/simulation-custom',
             depth: 2,
             pattern: '\\.json$'
           }
@@ -51,7 +51,7 @@ if (arg === 'custom') {
       });
       fs.mkdirSync(path.dirname(customPath), { recursive: true });
       fs.writeFileSync(customPath, JSON.stringify(customArr, null, 2), 'utf8');
-      console.log('[Simulator] Added "Agente Alfa" to agents.custom.json (no icon) for monogram collision test.');
+      console.log('[Simulator] Added "Agent Alpha" to agents.custom.json (no icon) for monogram collision test.');
     }
   } catch (err) {
     console.warn(`[Simulator] Could not prepare custom agent: ${err.message}`);
@@ -128,7 +128,7 @@ if (arg === 'all') {
   const ids = ['antigravity', 'codex', 'gemini', 'claude'];
   targetAgents = ids.map(id => allAgents.find(x => x.id === id)).filter(Boolean);
 } else if (arg === 'custom') {
-  const customAg = allAgents.find(x => x.id === 'agente-alfa') || allAgents[0];
+  const customAg = allAgents.find(x => x.id === 'agent-alpha' || x.id === 'agente-alfa') || allAgents[0];
   targetAgents = [customAg];
 } else {
   const found = allAgents.find(a => a.id.toLowerCase() === arg);

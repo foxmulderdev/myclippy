@@ -170,7 +170,8 @@ else {
       'gato-tecleando': 'typing-cat',
       '_plantilla': '_template',
       'hacker-encapuchado': 'hooded-hacker',
-      'dino-corredor': 'dino-runner'
+      'dino-corredor': 'dino-runner',
+      'cohete': 'rocket'
     };
     const desiredId = legacyMap[saved.activeAnimation] || saved.activeAnimation;
     activeId = animations.some(animation => animation.id === desiredId) ? desiredId : animations[0]?.id;

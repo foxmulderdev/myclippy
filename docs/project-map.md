@@ -41,6 +41,7 @@ flowchart TD
             AgentCat["Agent Cat (animations/agent-cat)\n- SVG Cat + Badges + Rings\n- Eye states + Sleep (3 min)\n- Satisfaction gesture"]
             DinoRunner["Dino Runner (animations/dino-runner)\n- Pixel art T-rex + Obstacles\n- Auto jump + Continuous run\n- Badges & Rings"]
             HoodedHacker["Hooded Hacker (animations/hooded-hacker)\n- SVG Hacker + Badges\n- Code stream + Floating symbols\n- Dimming & Agent alerts"]
+            Rocket["Rocket (animations/rocket)\n- Vertical space rocket\n- Particle effects & Lighting\n- Reactive thrusters"]
             TypingCat["Typing Cat (animations/typing-cat)\n- Classic Typing Cat"]
             Template["Template (animations/_template)\n- Custom boilerplate"]
         end
@@ -100,6 +101,11 @@ my-clippy/
 │   │   ├── manifest.json      # Metadatos (id: "hooded-hacker", tamaño 220x262)
 │   │   ├── animation.js       # Lógica SVG, escritura de código, símbolos y badges
 │   │   └── style.css          # Animaciones CSS, terminal verde y atenuación
+│   │
+│   ├── rocket/                # Animación: Cohete espacial con propulsión y partículas reactivas
+│   │   ├── manifest.json      # Metadatos (id: "rocket", tamaño 200x232)
+│   │   ├── animation.js       # Lógica SVG de cohete, iluminación reactiva y badges
+│   │   └── style.css          # Efectos CSS de propulsión, fuego, estrellas e insignias
 │   │
 │   ├── typing-cat/            # Animación: Gato tecleando clásico
 │   │   ├── manifest.json      # Metadatos (id: "typing-cat", tamaño 160x210)
@@ -181,6 +187,11 @@ my-clippy/
 - **Líneas de Código y Símbolos Flotantes:** Seis líneas de código estilizadas con efecto de escritura continua escalonada (`stroke-dasharray`), cursor parpadeante y símbolos de terminal (`01`, `>_`) que flotan hacia arriba.
 - **Mecanismo de Atenuación e Inactividad:** Tras 3 minutos sin actividad de agentes, la pantalla atenúa su brillo al 35% y las manos detienen el tecleo. Cualquier actividad restaura instantáneamente la intensidad.
 - **Insignias y Reacciones:** Soporte completo para insignias giratorias de agentes (`arc`, `dots`, `double-arc`, `segments`) con síntesis de voz en inglés al hacer clic.
+
+### 3.7. Animación Cohete (`animations/rocket/`)
+- **Diseño SVG:** Cohete espacial vertical en perspectiva con ventanilla, turbina de propulsión y partículas animadas (`viewBox="0 0 200 232"`).
+- **Propulsión Reactiva:** El fuego del motor, las líneas de velocidad y las estrellas de fondo reaccionan a los estados del monitor de actividad (`idle`, `working`, `intense`).
+- **Insignias y Reacciones:** Insignias de agentes activas con anillos giratorios situadas debajo del cohete. Al hacer clic se activa un impulso temporal y síntesis de voz.
 
 ---
 
